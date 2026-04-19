@@ -176,11 +176,11 @@ export default async function ContactPage() {
                 </div>
               </div>
 
-              {/* Map */}
+              {/* Map — dynamically uses the address from admin settings */}
               <div className="rounded-2xl overflow-hidden shadow-sm border border-gold/10 h-64">
                 <iframe
                   title="Spring Blooms Decor Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d429024.2984165!2d-97.28803955000001!3d32.7766642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e9940c4c80499%3A0x8af09df5786413a3!2sDallas-Fort%20Worth%20Metroplex%2C%20TX!5e0!3m2!1sen!2sus!4v1714500000000"
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(contact.address)}&output=embed`}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
