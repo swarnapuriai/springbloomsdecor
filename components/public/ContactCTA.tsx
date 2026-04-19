@@ -1,7 +1,32 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
+import type { ContactSettings } from "@/lib/supabase/types";
 
-export default function ContactCTA() {
+const DEFAULT_CONTACT: ContactSettings = {
+  phone: "+1 (555) 123-4567",
+  email: "info@springbloomsdecor.com",
+  address: "Dallas–Fort Worth, Texas",
+  hours: "Mon–Sat: 9 AM – 7 PM",
+};
+
+async function getContactSettings(): Promise<ContactSettings> {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("site_settings")
+      .select("value")
+      .eq("key", "contact")
+      .single();
+    return (data?.value as ContactSettings) ?? DEFAULT_CONTACT;
+  } catch {
+    return DEFAULT_CONTACT;
+  }
+}
+
+export default async function ContactCTA() {
+  const contact = await getContactSettings();
+
   return (
     <section className="py-20 bg-ivory-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,10 +57,10 @@ export default function ContactCTA() {
                 <div>
                   <div className="text-xs text-muted-foreground">Phone</div>
                   <a
-                    href="tel:+15551234567"
+                    href={`tel:${contact.phone.replace(/\D/g, "")}`}
                     className="font-semibold hover:text-maroon transition-colors"
                   >
-                    +1 (555) 123-4567
+                    {contact.phone}
                   </a>
                 </div>
               </div>
@@ -47,10 +72,10 @@ export default function ContactCTA() {
                 <div>
                   <div className="text-xs text-muted-foreground">Email</div>
                   <a
-                    href="mailto:info@springbloomsdecor.com"
+                    href={`mailto:${contact.email}`}
                     className="font-semibold hover:text-maroon transition-colors"
                   >
-                    info@springbloomsdecor.com
+                    {contact.email}
                   </a>
                 </div>
               </div>
@@ -61,9 +86,7 @@ export default function ContactCTA() {
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Location</div>
-                  <span className="font-semibold">
-                    Dallas–Fort Worth, Texas
-                  </span>
+                  <span className="font-semibold">{contact.address}</span>
                 </div>
               </div>
 
@@ -73,7 +96,7 @@ export default function ContactCTA() {
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground">Hours</div>
-                  <span className="font-semibold">Mon–Sat: 9 AM – 7 PM</span>
+                  <span className="font-semibold">{contact.hours}</span>
                 </div>
               </div>
             </div>
@@ -86,7 +109,7 @@ export default function ContactCTA() {
                 Send a Message
               </Link>
               <a
-                href="tel:+15551234567"
+                href={`tel:${contact.phone.replace(/\D/g, "")}`}
                 className="inline-block text-center border-2 border-maroon text-maroon font-semibold px-8 py-3 rounded hover:bg-maroon hover:text-ivory transition-colors"
               >
                 Call Us Now
@@ -94,7 +117,7 @@ export default function ContactCTA() {
             </div>
           </div>
 
-          {/* Right - Map or decorative image */}
+          {/* Right - Map */}
           <div className="rounded-2xl overflow-hidden shadow-xl h-80 lg:h-96 bg-ivory-dark border border-gold/20">
             <iframe
               title="Spring Blooms Decor Location"
