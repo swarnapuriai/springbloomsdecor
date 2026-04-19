@@ -27,12 +27,33 @@ export const metadata: Metadata = {
     "wedding decorator Texas",
     "Spring Blooms Decor",
   ],
+  metadataBase: new URL("https://www.springbloomsdecor.com"),
+  alternates: {
+    canonical: "https://www.springbloomsdecor.com",
+  },
   openGraph: {
     title: "Spring Blooms Decor | Indian Wedding & Event Decorators",
     description:
       "Breathtaking Indian wedding and event decorations across the USA. Mandap setups, florals, and more.",
     type: "website",
     locale: "en_US",
+    url: "https://www.springbloomsdecor.com",
+    siteName: "Spring Blooms Decor",
+    images: [
+      {
+        url: "/images/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Spring Blooms Decor",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spring Blooms Decor | Indian Wedding & Event Decorators",
+    description:
+      "Breathtaking Indian wedding and event decorations across the USA.",
+    images: ["/images/logo.jpg"],
   },
 };
 
