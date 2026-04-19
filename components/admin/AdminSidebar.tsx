@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -12,7 +13,6 @@ import {
   HelpCircle,
   Phone,
   LogOut,
-  Flower2,
   ExternalLink,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -44,18 +44,15 @@ export default function AdminSidebar() {
   return (
     <aside className="w-64 bg-sidebar text-sidebar-foreground flex flex-col min-h-screen">
       {/* Brand */}
-      <div className="p-6 border-b border-sidebar-border">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-full bg-sidebar-primary flex items-center justify-center">
-            <Flower2 className="w-5 h-5 text-maroon" />
-          </div>
-          <div>
-            <div className="text-sidebar-primary font-bold text-sm" style={{ fontFamily: "var(--font-playfair), serif" }}>
-              Spring Blooms
-            </div>
-            <div className="text-sidebar-foreground/50 text-xs">Admin Panel</div>
-          </div>
-        </div>
+      <div className="p-5 border-b border-sidebar-border">
+        <Image
+          src="/images/logo.jpg"
+          alt="Spring Blooms Decor"
+          width={150}
+          height={50}
+          className="h-11 w-auto object-contain brightness-200 contrast-75"
+        />
+        <div className="text-sidebar-foreground/50 text-xs mt-1.5 pl-0.5">Admin Panel</div>
       </div>
 
       {/* Nav */}

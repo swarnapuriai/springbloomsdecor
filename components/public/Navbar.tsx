@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Flower2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -38,21 +39,15 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-full bg-gold flex items-center justify-center group-hover:bg-gold-light transition-colors">
-              <Flower2 className="w-5 h-5 text-maroon" />
-            </div>
-            <div className="leading-tight">
-              <div
-                className="text-ivory font-bold text-sm tracking-wide"
-                style={{ fontFamily: "var(--font-playfair), serif" }}
-              >
-                Spring Blooms
-              </div>
-              <div className="text-gold text-xs tracking-widest uppercase">
-                Decor
-              </div>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo.jpg"
+              alt="Spring Blooms Decor"
+              width={160}
+              height={52}
+              className="h-12 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Flower2, Eye, EyeOff, LogIn } from "lucide-react";
+import Image from "next/image";
+import { Eye, EyeOff, LogIn } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 
@@ -39,16 +40,16 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-full bg-gold flex items-center justify-center mx-auto mb-4">
-            <Flower2 className="w-8 h-8 text-maroon" />
+          <div className="flex justify-center mb-3">
+            <Image
+              src="/images/logo.jpg"
+              alt="Spring Blooms Decor"
+              width={180}
+              height={60}
+              className="h-16 w-auto object-contain brightness-200 contrast-75"
+            />
           </div>
-          <h1
-            className="text-ivory text-3xl font-bold"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
-          >
-            Spring Blooms Decor
-          </h1>
-          <p className="text-ivory/60 text-sm mt-1">Admin Portal</p>
+          <p className="text-ivory/60 text-sm">Admin Portal</p>
         </div>
 
         {/* Card */}

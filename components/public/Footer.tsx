@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Flower2, Phone, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -47,21 +48,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
-                <Flower2 className="w-5 h-5 text-maroon" />
-              </div>
-              <div>
-                <div
-                  className="text-ivory font-bold text-base"
-                  style={{ fontFamily: "var(--font-playfair), serif" }}
-                >
-                  Spring Blooms Decor
-                </div>
-                <div className="text-gold text-xs tracking-widest">
-                  WEDDING &amp; EVENT DECOR
-                </div>
-              </div>
+            <div className="mb-4">
+              <Link href="/">
+                <Image
+                  src="/images/logo.jpg"
+                  alt="Spring Blooms Decor"
+                  width={160}
+                  height={52}
+                  className="h-14 w-auto object-contain brightness-200 contrast-75"
+                />
+              </Link>
             </div>
             <p className="text-ivory/70 text-sm leading-relaxed mb-5">
               Crafting timeless Indian wedding dreams across America with
