@@ -180,10 +180,60 @@ create policy "Authenticated users can manage site settings"
   with check (true);
 
 -- ============================================================
--- STORAGE BUCKETS (run separately or via Supabase dashboard)
+-- STORAGE BUCKETS
 -- ============================================================
--- insert into storage.buckets (id, name, public) values ('carousel', 'carousel', true);
--- insert into storage.buckets (id, name, public) values ('gallery', 'gallery', true);
+-- Create buckets (skip if already created via dashboard)
+insert into storage.buckets (id, name, public)
+  values ('carousel', 'carousel', true)
+  on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+  values ('gallery', 'gallery', true)
+  on conflict (id) do nothing;
+
+-- ============================================================
+-- STORAGE RLS POLICIES
+-- ============================================================
+
+-- Carousel bucket
+create policy "Public can read carousel images"
+  on storage.objects for select
+  using (bucket_id = 'carousel');
+
+create policy "Authenticated users can upload to carousel"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'carousel');
+
+create policy "Authenticated users can update carousel"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'carousel');
+
+create policy "Authenticated users can delete from carousel"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'carousel');
+
+-- Gallery bucket
+create policy "Public can read gallery images"
+  on storage.objects for select
+  using (bucket_id = 'gallery');
+
+create policy "Authenticated users can upload to gallery"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'gallery');
+
+create policy "Authenticated users can update gallery"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'gallery');
+
+create policy "Authenticated users can delete from gallery"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'gallery');
 
 -- ============================================================
 -- SEED DEFAULT SITE SETTINGS
